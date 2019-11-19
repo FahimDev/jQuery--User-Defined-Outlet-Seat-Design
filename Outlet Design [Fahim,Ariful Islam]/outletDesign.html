@@ -1,0 +1,184 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="jquery library/jquery-3.4.1.min.js"></script>
+    <script src="jquery-ui-1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="jquery-ui-1.12.1/jquery-ui.css">
+
+    <title>Design Outlet</title>
+</head>
+
+<style>
+.seatNumber{
+    background: yellow;
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
+.position{
+    background: gray;
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+.contentType{
+    background: tan;
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
+.btn-seller{
+                        
+                        height: 120px;
+                        width: 120px;
+                        margin-top: 3ex;
+                        margin-right: 3ex;
+                        margin-left: 5ex;
+                        margin-bottom: 3ex;
+                        }
+#sTab{
+    margin-left: 5ex;
+}                        
+
+#startTable{
+            display: grid;
+            grid-template-columns: 5% 5% 5% 5% 5% 5% 5% 5% 5% 5%;
+            grid-gap: 1em;
+            text-align: center;
+            perspective: 1000px;
+           /* grid-template-rows: 200px; */
+        }                       
+</style>
+
+<body>
+
+    <div class="contentType">
+
+        <label for="Outlet">Restaurant Name</label>
+        <input type="text" id="r_name" >
+        <label for="Outlet">Outlet Name</label>
+        <input type="text" id="r_outlet" >
+
+        <form id="typeSelect">
+                <input type="radio" name="type" value="5"> ADD Table<br>
+                <input type="radio" name="type" value="6"> ADD Space<br>
+                
+       
+        </form>
+    </div>
+
+    <div class="seatNumber">
+            <label for="seat">Provice Chair number</label>
+            <select class="btn btn-primary" id="personNumber">
+                    <option value="5">Pick a number</option>
+                    <option value="0">Blank</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="4">4</option>
+                  </select>
+    </div>
+
+    <div class="contentType" >
+            <input class="btn btn-success" type="button" id="moveU" style="margin-top: 1em; margin-bottom: 2em;" value="Create">
+    </div>
+
+    <div class="position">
+        <input class="btn btn-primary" type="button" id="save" value="Save" download >
+    </div>
+ 
+    <div id="sTab">
+        <div class="btn-seller">
+            
+                    <div class="cashDesk"><img src="asset/cashDesk.jpg" alt="cash desk Icon" width="130" height="130"></div>
+               
+        </div>
+            <div id="startTable">
+            </div>
+    </div>
+
+ 
+</body>
+</html>
+
+<script>
+$(document).ready(function(){
+    var i = 5 ;
+    var j = 1 ;
+    var a = 0 ;
+
+    $('#typeSelect').on('change',function(){
+        var selVal= $("[type='radio']:checked").val();
+        var i = 0 ;
+        $("#personNumber").val(i);
+        for (var j=1; j<=50; j++){
+
+            $('#gui'+j).attr("src","asset/person"+selVal+".jpg")
+             console.log(selVal);
+        
+        }
+
+    });
+
+    $('#moveU').click(function(){
+            for (var j=1; j<=50; j++) {
+                $('#startTable').append('<div class="table" id="tables'+j+'" ><img id="gui'+j+'" src="asset/person'+i+'.jpg" alt="4 Person Table" width="90" height="90"></div>'); 
+            }
+
+            });
+    $('#personNumber').on('change', function(){
+        i=$("#personNumber").val();
+        $("#personNumber").val(i);
+    });    
+    $(document).on('click', 'img' , function(){
+        var a = $(this).attr("id");
+        $('#'+a).attr("src","asset/person"+i+".jpg")
+    } );
+
+    $("#save").click(function () {
+        //alert('ok');
+        //var r_name=$("#r_name").val();
+        //var r_outlet=$("#r_outlet").val();
+       // var file_name = r_name+r_outlet;
+
+        //var blob = new Blob(["OK"],{type:"text/plain;charset;'utf - 8'"});
+        /*
+        var userLink = document.createElement('a');
+        userLink.setAttribute('download',file_name+'.txt');
+        userLink.setAttribute('herf',window.URL.createObjectURL(blob));
+        userLink.click();
+        */
+        //saveAs(blob,file_name+'.txt');
+       
+        /* 
+    var divToPrint=document.getElementById('sTab');
+
+        var newWin=window.open('','Print-Window');
+
+        newWin.document.open();
+
+        newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+
+        newWin.document.close();
+
+        setTimeout(function(){newWin.close();},10);
+    */
+    });
+
+   
+
+});
+</script>
